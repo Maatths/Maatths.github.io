@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matheus Oliveira · Portfólio</title>
+<meta name="description" content="Matheus Oliveira — Analista de Dados Regulatórios na Vivo. Power BI, SQL, Python e análise regulatória em Telecom.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ====== Tema: troque as cores aqui ====== */
+  :root {
+    --bg: #0b0f17;
+    --bg-2: #111827;
+    --card: #141b2a;
+    --border: #232c3f;
+    --text: #e6e9ef;
+    --muted: #8b93a7;
+    --accent: #38bdf8;
+    --accent-2: #a78bfa;
+    --ok: #34d399;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+
+  /* ====== Nav ====== */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11, 15, 23, .8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 800; font-size: 18px; }
+  .logo span { color: var(--accent); }
+  .links { display: flex; gap: 28px; font-size: 14px; color: var(--muted); }
+  .links a:hover { color: var(--text); }
+  .menu-btn { display: none; background: none; border: 0; color: var(--text); font-size: 24px; cursor: pointer; }
+
+  /* ====== Hero ====== */
+  .hero { padding: 96px 0 72px; position: relative; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(600px 300px at 15% 10%, rgba(56, 189, 248, .12), transparent 70%),
+      radial-gradient(500px 300px at 85% 30%, rgba(167, 139, 250, .12), transparent 70%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--ok);
+    border: 1px solid rgba(52, 211, 153, .3); background: rgba(52, 211, 153, .08);
+    padding: 6px 12px; border-radius: 999px; margin-bottom: 20px;
+  }
+  .tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); animation: pulse 2s infinite; }
+  @keyframes pulse { 50% { opacity: .3; } }
+  h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.1; font-weight: 800; letter-spacing: -.02em; }
+  h1 .grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lead { color: var(--muted); font-size: 18px; margin: 20px 0 12px; max-width: 540px; }
+  .hero .loc { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 15px;
+    border: 1px solid var(--border); transition: transform .15s, background .15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--accent); color: #04121c; border-color: var(--accent); }
+  .btn.ghost:hover { background: var(--card); }
+
+  /* Card do dashboard no hero (ilustrativo) */
+  .dash {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .6);
+  }
+  .dash-head { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .kpi { background: var(--bg-2); border-radius: 10px; padding: 12px; }
+  .kpi b { display: block; font-size: 22px; }
+  .kpi small { color: var(--muted); font-size: 12px; }
+  .kpi .up { color: var(--ok); font-size: 12px; }
+  .live { list-style: none; display: grid; gap: 8px; }
+  .live a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; background: var(--bg-2); border: 1px solid transparent; transition: border-color .15s, transform .15s; }
+  .live a:hover { border-color: var(--accent); transform: translateX(3px); }
+  .live i { font-style: normal; font-size: 20px; }
+  .live span { flex: 1; min-width: 0; }
+  .live b { display: block; font-size: 14px; }
+  .live small { color: var(--muted); font-size: 12px; }
+  .live em { font-style: normal; font-size: 11px; color: var(--ok); display: flex; align-items: center; gap: 5px; }
+  .live em::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+  .hl-list { list-style: none; display: grid; gap: 6px; margin-top: 10px; }
+  .hl-list li { color: var(--muted); font-size: 15px; padding-left: 18px; position: relative; }
+  .hl-list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  .hl-list strong { color: var(--text); font-weight: 600; }
+
+  /* ====== Seções ====== */
+  section { padding: 80px 0; }
+  .sec-title { margin-bottom: 40px; }
+  .sec-title .mono { color: var(--accent); font-size: 14px; }
+  .sec-title h2 { font-size: clamp(28px, 4vw, 38px); font-weight: 800; letter-spacing: -.01em; }
+
+  /* Sobre */
+  .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; }
+  .about p { color: var(--muted); margin-bottom: 16px; font-size: 17px; }
+  .about p strong { color: var(--text); font-weight: 600; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+  .stat b { font-size: 34px; font-weight: 800; color: var(--accent); }
+  .stat span { display: block; color: var(--muted); font-size: 14px; }
+
+  /* Competências */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+  .skill-card h3 { font-size: 17px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .skill-card h3 i { font-style: normal; font-size: 20px; }
+  .skill-card .chips { margin-top: 0; }
+  .skill-card .chip { font-size: 13px; padding: 6px 12px; color: var(--text); border: 1px solid var(--border); }
+
+  /* Atuação */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .filter {
+    background: var(--card); border: 1px solid var(--border); color: var(--muted);
+    padding: 8px 16px; border-radius: 999px; font-size: 14px; cursor: pointer; font-family: inherit;
+  }
+  .filter.active, .filter:hover { color: var(--text); border-color: var(--accent); }
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  .project {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform .2s, border-color .2s;
+  }
+  .project:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .project.hide { display: none; }
+  .thumb { height: 130px; display: grid; place-items: center; font-size: 46px; }
+  .project-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+  .project .where { font-size: 12px; color: var(--accent); margin-bottom: 6px; }
+  .project h3 { font-size: 18px; margin-bottom: 8px; }
+  .project p { color: var(--muted); font-size: 15px; flex: 1; }
+  .project .repo { margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--accent); }
+  .project .repo + .repo { margin-top: 6px; }
+  .project .case-list { flex: 1; color: var(--muted); font-size: 14px; padding-left: 18px; margin-top: 8px; }
+  .project .case-list li { margin-bottom: 5px; }
+  .project .case-list strong { color: var(--text); font-weight: 600; }
+  .project .repo:hover { text-decoration: underline; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .chip { font-size: 12px; padding: 4px 10px; border-radius: 6px; background: var(--bg-2); color: var(--muted); }
+
+  /* Galeria */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  .shot { margin: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .2s, border-color .2s; }
+  .shot:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .shot button { all: unset; cursor: zoom-in; display: block; background: #0b0f17; aspect-ratio: 16 / 9; overflow: hidden; }
+  .shot button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .shot figcaption { padding: 14px 16px 16px; }
+  .shot figcaption b { display: block; font-size: 15px; margin-bottom: 4px; }
+  .shot figcaption span { color: var(--muted); font-size: 14px; }
+  .lightbox { border: 0; padding: 0; background: transparent; max-width: min(1200px, 94vw); width: 100%; }
+  .lightbox::backdrop { background: rgba(5, 8, 14, .88); }
+  .lightbox img { width: 100%; height: auto; max-height: 78vh; object-fit: contain; border-radius: 10px; background: #fff; display: block; }
+  .lightbox .lb-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; color: var(--text); }
+  .lightbox .lb-cap b { display: block; }
+  .lightbox .lb-cap span { color: var(--muted); font-size: 14px; }
+  .lightbox .lb-btns { display: flex; gap: 8px; flex: none; }
+  .lightbox .lb-btns button { background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-family: inherit; font-size: 14px; }
+  .lightbox .lb-btns button:hover { border-color: var(--accent); }
+
+  /* Experiência */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+  .company { position: relative; margin-bottom: 44px; }
+  .company::before {
+    content: ""; position: absolute; left: -28px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--accent);
+  }
+  .company > h3 { font-size: 21px; }
+  .company > .total { color: var(--muted); font-size: 14px; }
+  .role { margin-top: 18px; padding: 18px 20px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
+  .role .when { color: var(--accent); font-size: 13px; }
+  .role h4 { font-size: 17px; margin: 2px 0 8px; }
+  .role p { color: var(--muted); font-size: 15px; }
+
+  /* Formação */
+  .edu-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; }
+  .edu-list { display: grid; gap: 12px; }
+  .edu { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+  .edu .when { color: var(--accent); font-size: 13px; }
+  .edu h3 { font-size: 16px; margin: 2px 0; }
+  .edu p { color: var(--muted); font-size: 14px; }
+  .badge { display: inline-block; margin-left: 6px; font-size: 11px; padding: 2px 8px; border-radius: 99px; color: var(--ok); background: rgba(52, 211, 153, .1); vertical-align: middle; }
+  .side-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; margin-bottom: 16px; }
+  .side-card h3 { font-size: 16px; margin-bottom: 14px; }
+  .side-card ul { list-style: none; display: grid; gap: 10px; }
+  .side-card li { color: var(--muted); font-size: 15px; display: flex; gap: 10px; }
+  .side-card li::before { content: "✓"; color: var(--ok); font-weight: 700; }
+
+  /* Contato */
+  .contact {
+    background: linear-gradient(135deg, rgba(56, 189, 248, .1), rgba(167, 139, 250, .1));
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 56px 32px; text-align: center;
+  }
+  .contact h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin-bottom: 12px; }
+  .contact p { color: var(--muted); margin-bottom: 28px; }
+  .contact .btns { justify-content: center; }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 32px 0 48px; }
+
+  /* Animação de entrada */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+  .reveal.show { opacity: 1; transform: none; }
+
+  /* ====== Responsivo ====== */
+  @media (max-width: 860px) {
+    .hero-grid, .about, .edu-grid { grid-template-columns: 1fr; }
+    .hero { padding-top: 56px; }
+    .menu-btn { display: block; }
+    .links {
+      display: none; position: absolute; top: 64px; left: 0; right: 0;
+      flex-direction: column; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--border);
+    }
+    .links.open { display: flex; }
+    .links a { padding: 14px 24px; }
+    .projects { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .kpi b { font-size: 18px; }
+    .contact { padding: 40px 20px; }
+    .contact .btn { width: 100%; text-align: center; word-break: break-all; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo">matheus<span>.</span>oliveira</a>
+    <button class="menu-btn" aria-label="Abrir menu" onclick="document.querySelector('.links').classList.toggle('open')">☰</button>
+    <div class="links">
+      <a href="#sobre">Sobre</a>
+      <a href="#competencias">Competências</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#formacao">Formação</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tag">Analista de Dados Regulatórios · Vivo</div>
+      <h1>Olá, eu sou <span class="grad">Matheus Oliveira</span>.<br>Transformo dados em decisões.</h1>
+      <p class="lead">Dashboards, KPIs e análises de impacto regulatório para o setor de Telecomunicações, com Power BI, SQL, Python e Excel.</p>
+      <p class="loc">📍 Guarulhos, São Paulo · Brasil</p>
+      <div class="btns">
+        <a href="#projetos" class="btn primary">Ver projetos</a>
+        <a href="#contato" class="btn ghost">Fale comigo</a>
+      </div>
+    </div>
+
+    <!-- Vitrine: números e links reais dos projetos publicados -->
+    <div class="dash">
+      <div class="dash-head"><span class="mono">projetos_no_ar</span><span>dados abertos e sintéticos</span></div>
+      <div class="kpis">
+        <div class="kpi"><small>Reclamações</small><b>9 mi</b><span class="up">Anatel, 2021+</span></div>
+        <div class="kpi"><small>Compromissos</small><b>21 mil</b><span class="up">4.313 municípios</span></div>
+        <div class="kpi"><small>Medidas DAX</small><b>50+</b><span class="up">case comercial</span></div>
+      </div>
+      <ul class="live">
+        <li><a href="https://maatths.github.io/Power-BI-/dashboard-web/" target="_blank" rel="noopener"><i>📡</i><span><b>Panorama de Reclamações</b><small>Power BI + dashboard web</small></span><em>online</em></a></li>
+        <li><a href="https://maatths.github.io/painel-compromissos-anatel/" target="_blank" rel="noopener"><i>🗺️</i><span><b>Compromissos Regulatórios</b><small>Editais e obrigações por município</small></span><em>online</em></a></li>
+        <li><a href="https://maatths.github.io/case-powerbi-comercial/" target="_blank" rel="noopener"><i>💼</i><span><b>Dashboard Comercial Executivo</b><small>PBIP, RLS e DAX avançado</small></span><em>online</em></a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ====== SOBRE ====== -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="sec-title reveal"><span class="mono">01 · sobre</span><h2>Um pouco sobre mim</h2></div>
+      <div class="about">
+        <div class="reveal">
+          <p>Sou <strong>Analista de Dados Regulatórios na Vivo (Telefônica Brasil)</strong>. Acompanho e analiso as normas da Anatel e de outros órgãos reguladores do setor de Telecomunicações.</p>
+          <p>Desenvolvo <strong>dashboards e KPIs</strong> em Power BI, Excel e Python, faço análises de impacto regulatório e dou suporte a auditorias e à automação de processos. O objetivo é ter mais eficiência operacional e decisões orientadas por dados.</p>
+          <p>Sou formado em <strong>Gestão da Tecnologia da Informação</strong> pela Universidade Cruzeiro do Sul e estou começando a pós-graduação em <strong>AI Application for Data Analysis</strong> na FIAP. Busco transformar dados em insights estratégicos e fortalecer a governança da informação.</p>
+        </div>
+        <div class="stats reveal">
+          <div class="stat"><b data-count="6">0</b><b>+</b><span>anos de mercado</span></div>
+          <div class="stat"><b data-count="2">0</b><b>,5</b><span>anos na Vivo</span></div>
+          <div class="stat"><b data-count="5">0</b><span>certificações</span></div>
+          <div class="stat"><b data-count="4">0</b><span>projetos no GitHub</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== COMPETÊNCIAS ====== -->
+  <section id="competencias" style="background: var(--bg-2);">
+    <div class="wrap">
+      <div class="sec-title reveal"><span class="mono">02 · competências</span><h2>Ferramentas e competências</h2></div>
+      <div class="skills">
+        <div class="skill-card reveal">
+          <h3><i>📊</i> Dados &amp; BI</h3>
+          <div class="chips">
+            <span class="chip">Power BI</span><span class="chip">Microsoft Fabric</span><span class="chip">SQL</span>
+            <span class="chip">Python</span><span class="chip">Excel</span><span class="chip">ETL</span>
+            <span class="chip">Modelagem de dados</span><span class="chip">Google Cloud</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3><i>📜</i> Regulatório &amp; Governança</h3>
+          <div class="chips">
+            <span class="chip">Normas Anatel</span><span class="chip">Análise de impacto regulatório</span>
+            <span class="chip">Compliance</span><span class="chip">Auditorias internas</span>
+            <span class="chip">Governança de dados</span><span class="chip">Licenças e autorizações</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3><i>🧭</i> Gestão &amp; Processos</h3>
+          <div class="chips">
+            <span class="chip">Automação de processos</span><span class="chip">Melhoria contínua</span>
+            <span class="chip">Agile / Scrum</span><span class="chip">SAP</span><span class="chip">CAPEX / OPEX</span>
+            <span class="chip">Gestão de projetos</span><span class="chip">Planejamento</span><span class="chip">Relatórios técnicos</span>
+            <span class="chip">Segurança da informação</span><span class="chip">Infraestrutura de TI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ATUAÇÃO ====== -->
+  <section id="projetos">
+    <div class="wrap">
+      <div class="sec-title reveal"><span class="mono">03 · projetos</span><h2>Projetos em destaque</h2></div>
+      <div class="filters reveal">
+        <button class="filter active" data-f="all">Todos</button>
+        <button class="filter" data-f="demo">Com demo online</button>
+        <button class="filter" data-f="reg">Regulatório &amp; Telecom</button>
+        <button class="filter" data-f="bi">BI Comercial</button>
+        <button class="filter" data-f="estudos">Estudos</button>
+      </div>
+      <div class="projects">
+        <!-- Para adicionar um projeto, copie um bloco <article> e altere os textos e o data-cat (reg, bi, estudos; acrescente "demo" se tiver link online) -->
+        <article class="project reveal" data-cat="reg demo">
+          <div class="thumb" style="background: linear-gradient(135deg, #0e3a52, #3a1e5a);">📡</div>
+          <div class="project-body">
+            <div class="where mono">Projeto pessoal · Dados abertos Anatel</div>
+            <h3>Panorama de Reclamações em Telecom</h3>
+            <p>9 milhões de reclamações registradas na Anatel desde 2021, com evolução mensal, operadoras, serviços, principais motivos, mapa por UF e taxa de reabertura comparada ao mercado. Dashboard web interativo, com versão em Power BI.</p>
+            <div class="chips"><span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">Star Schema</span><span class="chip">C# (ETL)</span><span class="chip">JavaScript</span></div>
+            <a class="repo" href="https://maatths.github.io/Power-BI-/dashboard-web/" target="_blank" rel="noopener">Abrir dashboard →</a>
+            <a class="repo" href="https://github.com/Maatths/Power-BI-" target="_blank" rel="noopener">Ver no GitHub →</a>
+          </div>
+        </article>
+        <article class="project reveal" data-cat="reg demo">
+          <div class="thumb" style="background: linear-gradient(135deg, #3a1e5a, #0e3a52);">🗺️</div>
+          <div class="project-body">
+            <div class="where mono">Vivo · Dados Regulatórios <span class="badge">projeto corporativo</span></div>
+            <h3>Painel de Compromissos Regulatórios</h3>
+            <p>Acompanhamento de cerca de 7 mil obrigações de cobertura e infraestrutura em mais de 3 mil municípios, vindas dos editais de 3G, 4G, 5G e Banda H, do Edital de Sobras do SMP, de TAC e do Termo de Autocomposição. Os prazos são recalculados diariamente (a vencer → vencido) e o painel tem mapa por UF, filtros cruzados e ficha por município com população, área, cobertura e operadoras presentes. A base é atualizada por upload ou sincronização da planilha.</p>
+            <div class="chips"><span class="chip">JavaScript</span><span class="chip">ECharts</span><span class="chip">SheetJS</span><span class="chip">Excel</span><span class="chip">Power BI</span><span class="chip">Editais Anatel</span></div>
+            <a class="repo" href="https://maatths.github.io/painel-compromissos-anatel/" target="_blank" rel="noopener">Abrir demo com dados públicos →</a>
+            <a class="repo" href="https://github.com/Maatths/painel-compromissos-anatel" target="_blank" rel="noopener">Ver no GitHub →</a>
+          </div>
+        </article>
+        <article class="project reveal" data-cat="bi demo">
+          <div class="thumb" style="background: linear-gradient(135deg, #0e4a3a, #1e2a5a);">💼</div>
+          <div class="project-body">
+            <div class="where mono">Case técnico · Power BI Sênior <span class="badge">dados sintéticos</span></div>
+            <h3>Dashboard Comercial Executivo</h3>
+            <p style="flex: none">Solução de ponta a ponta para a área comercial de um grupo de distribuição:</p>
+            <ul class="case-list">
+              <li><strong>SQL Server:</strong> dimensões conformadas, views de BI, procedure de carga com rejeição de linhas inválidas, columnstore e RCSI.</li>
+              <li><strong>Modelo estrela com duas fatos:</strong> vendas diárias por item e metas mensais por categoria.</li>
+              <li><strong>Mais de 50 medidas DAX:</strong> YoY, YTD, média móvel, meta distribuída por dias úteis, participação e ranking de filiais e narrativa executiva automática.</li>
+              <li><strong>Recursos de entrega:</strong> RLS dinâmico por regional, atualização incremental, drill-through, bookmarks e tooltips.</li>
+              <li><strong>Documentação:</strong> plano de governança (workspaces, DEV/HML/PRD, App) e proposta de uso de Copilot.</li>
+            </ul>
+            <div class="chips"><span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">SQL Server</span><span class="chip">RLS</span><span class="chip">Star Schema</span><span class="chip">Governança</span></div>
+            <a class="repo" href="https://maatths.github.io/case-powerbi-comercial/" target="_blank" rel="noopener">Abrir protótipo interativo →</a>
+            <a class="repo" href="https://github.com/Maatths/case-powerbi-comercial" target="_blank" rel="noopener">Ver PBIP no GitHub →</a>
+          </div>
+        </article>
+        <article class="project reveal" data-cat="reg">
+          <div class="thumb" style="background: linear-gradient(135deg, #1e2a5a, #3a1e5a);">🛡️</div>
+          <div class="project-body">
+            <div class="where mono">Vivo · Dados Regulatórios <span class="badge">projeto corporativo</span></div>
+            <h3>Painel de Conformidade Regulatória</h3>
+            <p>Controle de cerca de 1,5 mil processos de fiscalização e demandas da Anatel desde 2013: inspeções, interferências, intimações, projetos e editais. Mostra processos em aberto e finalizados, iniciados e encerrados por mês, trimestre ou ano (com acumulado no ano), impacto (verde, amarelo e vermelho), carga por responsável e principais demandantes. Tem tabela pesquisável com ficha de cada processo, exportação para Excel e atualização por upload da planilha.</p>
+            <div class="chips"><span class="chip">JavaScript</span><span class="chip">SheetJS</span><span class="chip">Excel</span><span class="chip">Lógica DAX</span><span class="chip">Fiscalização Anatel</span></div>
+          </div>
+        </article>
+        <article class="project reveal" data-cat="estudos">
+          <div class="thumb" style="background: linear-gradient(135deg, #1e2a5a, #4a1e4a);">📖</div>
+          <div class="project-body">
+            <div class="where mono">Projeto pessoal · Desafio DIO</div>
+            <h3>Miniguia: Storytelling com Dados</h3>
+            <p>Caderno de estudos sobre o livro de Cole Nussbaumer Knaflic, montado com o NotebookLM. Tem curadoria de fontes, engenharia de prompts com lições aprendidas, resumos, glossário e prompts reutilizáveis.</p>
+            <div class="chips"><span class="chip">Storytelling</span><span class="chip">Visualização de dados</span><span class="chip">NotebookLM</span><span class="chip">IA generativa</span></div>
+            <a class="repo" href="https://github.com/Maatths/miniguia-estudos-storytelling-dados" target="_blank" rel="noopener">Ver no GitHub →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== GALERIA ====== -->
+  <!-- Para adicionar uma imagem: salve em imagens/galeria/ e copie um bloco <figure> -->
+  <section id="galeria">
+    <div class="wrap">
+      <div class="sec-title reveal"><span class="mono">04 · galeria</span><h2>Galeria de dashboards</h2></div>
+      <div class="gallery">
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar Dashboard Diretoria"><img src="imagens/galeria/01-dashboard-diretoria.png" alt="Dashboard Diretoria com estratégias e projetos por diretoria, status e prioridade" loading="lazy"></button>
+          <figcaption><b>Dashboard Diretoria</b><span>Portfólio de estratégias e projetos por diretoria, com status, substatus, prioridade, escopo e impacto.</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar Trilha Única"><img src="imagens/galeria/02-trilha-unica-resumo.png" alt="Painel Trilha Única com ações, visitas, oportunidades e receita" loading="lazy"></button>
+          <figcaption><b>Trilha Única | Resumo</b><span>Funil de ações comerciais: visitas, oportunidades, conversão por etapa e receita recorrente e one shot.</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar Churn Voz"><img src="imagens/galeria/03-churn-voz.png" alt="Painel de churn de voz com faturamento das baixas por mês" loading="lazy"></button>
+          <figcaption><b>Churn | Voz</b><span>Churn e faturamento das baixas mês a mês, com participação por segmento e filtros por gerência e tipo de movimento.</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar Vendas de Licenças"><img src="imagens/galeria/04-vendas-licencas.png" alt="Painel de vendas com pedidos, licenças, receita, produtos e provedores" loading="lazy"></button>
+          <figcaption><b>Vendas de Licenças</b><span>Pedidos, licenças, receita e ticket médio por ano, produto, provedor e canal (presencial e online).</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar SLA de Atendimento"><img src="imagens/galeria/05-sla-atendimento.png" alt="Painel de SLA de atendimento e quality assurance por sistema e torre" loading="lazy"></button>
+          <figcaption><b>SLA de Atendimento</b><span>SLA e quality assurance, demandas por tipo de ação e tempo de atendimento por sistema e por torre.</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar Vivo One MKT Hub"><img src="imagens/galeria/06-vivo-one-mkt-hub.png" alt="Painel MKT Hub com visão de faturamento e linhas por cliente" loading="lazy"></button>
+          <figcaption><b>Vivo One | MKT Hub</b><span>Visão por cliente: faturamento médio, ticket, valor recomendado, aging e quantidade de linhas.</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar Distribuição de Valor"><img src="imagens/galeria/07-distribuicao-valor.png" alt="Painel de distribuição de clientes por faixa de valor" loading="lazy"></button>
+          <figcaption><b>Distribuição de Valor</b><span>Clientes por faixa de valor, com filtros por plano, segmento, subsídio e faixa de linhas.</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar Requisições e Incidentes"><img src="imagens/galeria/08-requisicoes-incidentes.png" alt="Painel de volumetria de requisições e incidentes" loading="lazy"></button>
+          <figcaption><b>Requisições e Incidentes</b><span>Volumetria diária e mensal de requisições, tempo médio de reparo, estados e principais motivos.</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar KPIs de Processos"><img src="imagens/galeria/09-kpis-processos.png" alt="Painel de KPIs de processos testados e incidentes" loading="lazy"></button>
+          <figcaption><b>KPIs de Processos</b><span>Processos testados e processos com incidentes, por mês e por tipo.</span></figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <button type="button" aria-label="Ampliar capa Vivo One"><img src="imagens/galeria/10-vivo-one-capa.png" alt="Capa do relatório Vivo One Acompanhamento Comercial" loading="lazy"></button>
+          <figcaption><b>Vivo One | Acompanhamento Comercial</b><span>Capa e navegação do relatório: funil contra meta e resumo das ações da trilha.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Imagem ampliada">
+    <img id="lbImg" alt="">
+    <div class="lb-bar">
+      <div class="lb-cap" id="lbCap"></div>
+      <div class="lb-btns">
+        <button type="button" id="lbPrev" aria-label="Imagem anterior">←</button>
+        <button type="button" id="lbNext" aria-label="Próxima imagem">→</button>
+        <button type="button" id="lbClose" aria-label="Fechar">✕</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ====== EXPERIÊNCIA ====== -->
+  <section id="experiencia" style="background: var(--bg-2);">
+    <div class="wrap">
+      <div class="sec-title reveal"><span class="mono">05 · experiência</span><h2>Trajetória profissional</h2></div>
+      <div class="timeline">
+        <div class="company reveal">
+          <h3>Vivo (Telefônica Brasil)</h3>
+          <span class="total">2 anos e 6 meses · São Paulo</span>
+          <div class="role">
+            <span class="when mono">jan 2026 — atual</span>
+            <h4>Analista de Dados Regulatórios</h4>
+            <ul class="hl-list">
+              <li><strong>Dashboards e KPIs regulatórios</strong> em Power BI e Excel, com rastreabilidade das informações usadas pela área.</li>
+              <li><strong>Análise de impacto regulatório:</strong> monitoramento das normas da Anatel e análise de bases, licenças e autorizações.</li>
+              <li><strong>Acompanhamento de obrigações</strong> de editais e fiscalizações (veja os painéis de Compromissos e Conformidade em Projetos).</li>
+              <li><strong>Auditorias e relatórios técnicos</strong> com foco em governança de dados.</li>
+              <li><strong>Automação de rotinas</strong> com Python e Power Query para reduzir trabalho manual.</li>
+            </ul>
+          </div>
+          <div class="role">
+            <span class="when mono">jun 2024 — dez 2025</span>
+            <h4>Analista de Marketing Analytics</h4>
+            <ul class="hl-list">
+              <li><strong>Coleta, tratamento e análise de dados</strong> com Excel, SQL, Python e Power BI.</li>
+              <li><strong>Dashboards comerciais e gerenciais</strong> para diferentes stakeholders: funil, churn, faturamento e SLA (exemplos na Galeria).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="company reveal">
+          <h3>Doremus</h3>
+          <span class="total">1 ano e 4 meses · Guarulhos</span>
+          <div class="role">
+            <span class="when mono">abr 2023 — jan 2024</span>
+            <h4>Analista de Suporte de Redes e Sistemas</h4>
+            <p>Diagnóstico e resolução de problemas de hardware, software e redes, gestão de chamados, instalação e configuração de sistemas e suporte à infraestrutura de TI. Também atuei na criação de políticas e procedimentos de segurança da informação.</p>
+          </div>
+          <div class="role">
+            <span class="when mono">out 2022 — mar 2023</span>
+            <h4>Assistente Técnico Eletroeletrônico</h4>
+            <p>Instalação e manutenção preventiva, corretiva e preditiva de equipamentos eletroeletrônicos, diagnósticos, testes e relatórios técnicos.</p>
+          </div>
+        </div>
+
+        <div class="company reveal">
+          <h3>GRU Airport — Aeroporto Internacional de São Paulo</h3>
+          <span class="total">1 ano e 10 meses · Guarulhos</span>
+          <div class="role">
+            <span class="when mono">dez 2021 — set 2022</span>
+            <h4>Assistente Administrativo</h4>
+            <p>Apoio operacional e administrativo, conferência de relatórios, preparação de dados para atualização de banco de dados e acompanhamento de contratos.</p>
+          </div>
+          <div class="role">
+            <span class="when mono">dez 2020 — dez 2021</span>
+            <h4>Planejador de Manutenção</h4>
+            <ul class="hl-list">
+              <li><strong>Indicadores de manutenção</strong> e dashboards em Power BI.</li>
+              <li><strong>Ordens de serviço no SAP</strong>, planilhas e apresentações.</li>
+              <li><strong>Controle de CAPEX/OPEX</strong> e de centros de custo.</li>
+            </ul>
+          </div>
+          <div class="role">
+            <span class="when mono">dez 2020 — mar 2021</span>
+            <h4>Manutenção Elétrica</h4>
+            <p>Suporte à manutenção preventiva e corretiva de sistemas elétricos prediais, seguindo normas de segurança.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FORMAÇÃO ====== -->
+  <section id="formacao">
+    <div class="wrap">
+      <div class="sec-title reveal"><span class="mono">06 · formação</span><h2>Formação e certificações</h2></div>
+      <div class="edu-grid">
+        <div class="edu-list">
+          <div class="edu reveal">
+            <span class="when mono">jul 2026 — ago 2027</span>
+            <h3>Pós-graduação: AI Application for Data Analysis <span class="badge">em andamento</span></h3>
+            <p>FIAP</p>
+          </div>
+          <div class="edu reveal">
+            <span class="when mono">2023 — 2026</span>
+            <h3>CST em Gestão de Tecnologia da Informação e Sistemas da Informação</h3>
+            <p>Universidade Cruzeiro do Sul</p>
+          </div>
+          <div class="edu reveal">
+            <span class="when mono">2021 — 2022</span>
+            <h3>Técnico em Tecnologia da Informação</h3>
+            <p>Senac São Paulo</p>
+          </div>
+          <div class="edu reveal">
+            <span class="when mono">2020 — 2022</span>
+            <h3>Aprendizagem Industrial: Eletricista de Manutenção Eletroeletrônica</h3>
+            <p>Senai São Paulo</p>
+          </div>
+          <div class="edu reveal">
+            <span class="when mono">2019</span>
+            <h3>Curso Profissionalizante: Eletricista Instalador</h3>
+            <p>Senai São Paulo</p>
+          </div>
+        </div>
+        <div>
+          <div class="side-card reveal">
+            <h3>🏅 Certificações</h3>
+            <ul>
+              <li>Microsoft Power BI Data Analyst Associate (PL-300)</li>
+              <li>Microsoft Fabric Analytics Engineer Associate (DP-600)</li>
+              <li>Google Cloud</li>
+              <li>Boas Práticas de Cibersegurança (Cybersecurity Awareness)</li>
+              <li>Certificações Agile Scrum</li>
+            </ul>
+          </div>
+          <div class="side-card reveal">
+            <h3>🌐 Idiomas</h3>
+            <ul>
+              <li>Português: nativo</li>
+              <li>Inglês: técnico (leitura de documentação e termos da área)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTATO ====== -->
+  <section id="contato">
+    <div class="wrap">
+      <div class="contact reveal">
+        <h2>Vamos conversar?</h2>
+        <p>Aberto a trocas sobre dados, BI, regulação em Telecom e novas oportunidades.</p>
+        <div class="btns">
+          <a href="mailto:matheusoliveiraizabel@gmail.com" class="btn primary">✉️ matheusoliveiraizabel@gmail.com</a>
+          <a href="https://www.linkedin.com/in/matheus-oliveira-06b0b5162" target="_blank" rel="noopener" class="btn ghost">LinkedIn</a>
+          <a href="https://github.com/Maatths" target="_blank" rel="noopener" class="btn ghost">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="ano"></span> Matheus Oliveira · Feito com HTML, CSS e café ☕</div>
+</footer>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+
+  // Fecha o menu mobile ao clicar num link
+  document.querySelectorAll('.links a').forEach(a =>
+    a.addEventListener('click', () => document.querySelector('.links').classList.remove('open')));
+
+  // Contador animado dos números
+  function countUp(el) {
+    const target = +el.dataset.count, dur = 1200, start = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  // Revela elementos ao rolar + anima contadores
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('show');
+      e.target.querySelectorAll('[data-count]').forEach(countUp);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Galeria: ampliar imagem (Esc fecha, setas navegam)
+  const shots = [...document.querySelectorAll('.shot')];
+  const lb = document.getElementById('lightbox');
+  let atual = 0;
+  function abrir(i) {
+    atual = (i + shots.length) % shots.length;
+    const img = shots[atual].querySelector('img'), cap = shots[atual].querySelector('figcaption');
+    document.getElementById('lbImg').src = img.src;
+    document.getElementById('lbImg').alt = img.alt;
+    document.getElementById('lbCap').innerHTML = cap.innerHTML;
+    if (!lb.open) lb.showModal();
+  }
+  shots.forEach((s, i) => s.querySelector('button').addEventListener('click', () => abrir(i)));
+  document.getElementById('lbPrev').addEventListener('click', () => abrir(atual - 1));
+  document.getElementById('lbNext').addEventListener('click', () => abrir(atual + 1));
+  document.getElementById('lbClose').addEventListener('click', () => lb.close());
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+  lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') abrir(atual - 1); if (e.key === 'ArrowRight') abrir(atual + 1); });
+
+  // Filtro da seção de projetos
+  document.querySelectorAll('.filter').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.f;
+    document.querySelectorAll('.project').forEach(p => {
+      const show = f === 'all' || p.dataset.cat.split(' ').includes(f);
+      p.classList.toggle('hide', !show);
+      if (show) p.classList.add('show');
+    });
+  }));
+</script>
+</body>
+</html>
