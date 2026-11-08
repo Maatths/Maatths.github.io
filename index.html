@@ -66,6 +66,24 @@
     padding: 6px 12px; border-radius: 999px; margin-bottom: 20px;
   }
   .tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); animation: pulse 2s infinite; }
+  .hero-id { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 22px; }
+  .hero-id .tag { margin-bottom: 0; }
+  .avatar {
+    width: 96px; height: 96px; border-radius: 50%; object-fit: cover; flex: none;
+    padding: 3px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 10px 30px -10px rgba(56, 189, 248, .5);
+  }
+  @media (max-width: 480px) { .avatar { width: 80px; height: 80px; } }
+  .hero-grid > * { min-width: 0; }
+  .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kpi { min-width: 0; overflow-wrap: anywhere; }
+  @media (max-width: 480px) {
+    .dash { padding: 14px; }
+    .kpi { padding: 10px; }
+    .kpi small, .kpi .up { font-size: 11px; }
+    .dash-head { flex-direction: column; gap: 2px; }
+    .live a { padding: 10px; gap: 10px; }
+  }
   @keyframes pulse { 50% { opacity: .3; } }
   h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.1; font-weight: 800; letter-spacing: -.02em; }
   h1 .grad {
@@ -285,7 +303,10 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="tag">Analista de Dados Regulatórios · Vivo</div>
+      <div class="hero-id">
+        <img class="avatar" src="imagens/foto-perfil.jpg" alt="Foto de Matheus Oliveira" width="96" height="96">
+        <div class="tag">Analista de Dados Regulatórios · Vivo</div>
+      </div>
       <h1>Olá, eu sou <span class="grad">Matheus Oliveira</span>.<br>Transformo dados em decisões.</h1>
       <p class="lead">Dashboards, KPIs e análises de impacto regulatório para o setor de Telecomunicações, com Power BI, SQL, Python e Excel.</p>
       <p class="loc">📍 Guarulhos, São Paulo · Brasil</p>
