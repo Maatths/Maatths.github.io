@@ -3,3 +3,5 @@ projetos/
 
 # Rascunhos pessoais
 linkedin-textos.md
+# Fonte HTML usada para gerar o PDF do currículo
+curriculo/*.html
